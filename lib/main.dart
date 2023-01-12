@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'NBA NOW',
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Helvetica',
+      ),
     );
   }
 }
