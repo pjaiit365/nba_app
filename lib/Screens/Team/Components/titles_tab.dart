@@ -3,10 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../Components/title_years.dart';
 import '../../../constants.dart';
 
-class TitlesWonTab extends StatelessWidget {
+class TitlesWonTab extends StatefulWidget {
   const TitlesWonTab({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<TitlesWonTab> createState() => _TitlesWonTabState();
+}
+
+class _TitlesWonTabState extends State<TitlesWonTab> {
+  bool finalsShowMore = false;
+  bool conferenceShowMore = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,56 +29,105 @@ class TitlesWonTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: <Widget>[
-                  Container(
-                    height: 10,
-                    width: 10,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      shape: BoxShape.circle,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            Container(
+                              height: 10,
+                              width: 10,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Colors.blueAccent,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            SizedBox(width: 15),
+                            Text(
+                              'Play-off Finals Titles',
+                              style: TextStyle(
+                                  fontSize: 17, color: Colors.blueAccent),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 25.0, bottom: 13),
+                          child: Text(
+                            '7-time NBA Finals Champions',
+                            style: TextStyle(
+                                fontSize: 16, fontFamily: 'Helvetica'),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(width: 15),
-                  Text(
-                    'Play-off Finals Titles',
-                    style: TextStyle(fontSize: 17, color: Colors.blueAccent),
-                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        finalsShowMore = !finalsShowMore;
+                      });
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white, width: 1.5),
+                      ),
+                      child: finalsShowMore
+                          ? Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: Colors.blueAccent,
+                              size: 38,
+                            )
+                          : Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                            ),
+                    ),
+                  )
                 ],
               ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0, bottom: 13),
-                child: Text(
-                  '7-time NBA Finals Champions',
-                  style: TextStyle(fontSize: 16, fontFamily: 'Helvetica'),
-                ),
-              ),
               Center(
-                child: Text(
-                  'Years Won',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
+                  child: finalsShowMore
+                      ? Text(
+                          'Years Won',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )
+                      : null),
               finalsYearList.isEmpty
                   ? Center(
-                      child: Text(
-                      'No Play-off Finals trophy won yet.',
-                      style: TextStyle(color: Colors.black, fontSize: 16),
-                    ))
-                  : GridView.builder(
-                      scrollDirection: Axis.vertical,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      physics: BouncingScrollPhysics(),
-                      itemCount: 7,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return TitleYears(yearList: finalsYearList[index]);
-                      },
-                    ),
+                      child: finalsShowMore
+                          ? Text(
+                              'No Play-off Finals trophy won yet.',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                            )
+                          : null)
+                  : finalsShowMore
+                      ? GridView.builder(
+                          scrollDirection: Axis.vertical,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                          physics: BouncingScrollPhysics(),
+                          itemCount: 7,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return TitleYears(yearList: finalsYearList[index]);
+                          },
+                        )
+                      : Text(''),
             ],
           ),
           SizedBox(height: 20),
@@ -79,55 +136,110 @@ class TitlesWonTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 10,
-                    width: 10,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      shape: BoxShape.circle,
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Colors.blueAccent,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            SizedBox(width: 15),
+                            Text(
+                              'Conference Titles',
+                              style: TextStyle(
+                                  fontSize: 17, color: Colors.blueAccent),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 25.0, bottom: 13),
+                          child: Text(
+                            '10-time NBA Conference Champions',
+                            style: TextStyle(
+                                fontSize: 16, fontFamily: 'Helvetica'),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(width: 15),
-                  Text(
-                    'Conference Titles',
-                    style: TextStyle(fontSize: 17, color: Colors.blueAccent),
-                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        conferenceShowMore = !conferenceShowMore;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white, width: 1.5),
+                        ),
+                        child: conferenceShowMore
+                            ? Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Colors.blueAccent,
+                                size: 38,
+                              )
+                            : Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.black,
+                              ),
+                      ),
+                    ),
+                  )
                 ],
               ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0, bottom: 13),
-                child: Text(
-                  '10-time NBA Conference Champions',
-                  style: TextStyle(fontSize: 16, fontFamily: 'Helvetica'),
-                ),
-              ),
               Center(
-                child: Text(
-                  'Years Won',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
+                  child: conferenceShowMore
+                      ? Text(
+                          'Years Won',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )
+                      : null),
               conferenceYearList.isEmpty
                   ? Center(
-                      child: Text(
-                      'No Conference titles won yet.',
-                      style: TextStyle(color: Colors.black, fontSize: 16),
-                    ))
-                  : GridView.builder(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: 10,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return TitleYears(yearList: conferenceYearList[index]);
-                      },
-                    ),
+                      child: conferenceShowMore
+                          ? Text(
+                              'No Conference titles won yet.',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                            )
+                          : null)
+                  : conferenceShowMore
+                      ? GridView.builder(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                          physics: AlwaysScrollableScrollPhysics(),
+                          itemCount: 10,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return TitleYears(
+                                yearList: conferenceYearList[index]);
+                          },
+                        )
+                      : Text(''),
             ],
           ),
         ],

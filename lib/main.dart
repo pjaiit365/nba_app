@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'NBA NOW',
+      title: 'NBA TODAY',
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

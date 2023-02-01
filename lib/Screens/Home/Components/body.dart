@@ -15,7 +15,7 @@ class Body extends StatelessWidget {
   Future getTeams() async {
     var response = await http.get(Uri.https('balldontlie.io', 'api/v1/teams'));
     var jsonData = jsonDecode(response.body);
-    print(response.body);
+    // print(response.body);
 
     for (var eachTeam in jsonData['data']) {
       final teams = TeamData(
@@ -41,27 +41,27 @@ class Body extends StatelessWidget {
           },
         )
 
-        //   child: FutureBuilder(
-        //     future: getTeams(),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.connectionState == ConnectionState.done) {
-        //         return ListView.builder(
-        //           itemCount: team.length,
-        //           physics: BouncingScrollPhysics(),
-        //           itemBuilder: (context, index) {
-        //             return TeamsTile(
-        //               team_abbreviation: team[index].abbreviation,
-        //               team_name: team[index].fullName,
-        //               team_logo: teamLogo[index],
-        //               index: index,
-        //             );
-        //           },
-        //         );
-        //       } else {
-        //         return Center(child: CircularProgressIndicator(color: kblue));
-        //       }
-        //     },
-        //   ),
+        // child: FutureBuilder(
+        //   future: getTeams(),
+        //   builder: (context, snapshot) {
+        //     if (snapshot.connectionState == ConnectionState.done) {
+        //       return ListView.builder(
+        //         itemCount: team.length,
+        //         physics: BouncingScrollPhysics(),
+        //         itemBuilder: (context, index) {
+        //           return TeamsTile(
+        //             team_abbreviation: team[index].abbreviation,
+        //             team_name: team[index].fullName,
+        //             team_logo: teamLogo[index],
+        //             index: index,
+        //           );
+        //         },
+        //       );
+        //     } else {
+        //       return Center(child: CircularProgressIndicator(color: kblue));
+        //     }
+        //   },
+        // ),
         );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class DefaultBackButton extends StatelessWidget {
   final Color buttonColor;
   const DefaultBackButton({required this.buttonColor});
