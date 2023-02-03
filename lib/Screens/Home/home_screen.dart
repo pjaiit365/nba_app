@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nba_app/Screens/Home/Components/body.dart';
+import 'package:nba_app/search/search_teams.dart';
 
 import '../../constants.dart';
 
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               )
             : Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 25.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -78,16 +80,20 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 40,
               decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(color: kred, width: 2),
+                border: Border.all(color: CupertinoColors.white, width: 2),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: IconButton(
                   highlightColor: Colors.white,
                   splashColor: Colors.white,
                   onPressed: () {
-                    setState(() {
-                      isSearchClicked = !isSearchClicked;
-                    });
+                    // setState(() {
+                    //   isSearchClicked = !isSearchClicked;
+                    // });
+                    showSearch(
+                      context: context,
+                      delegate: SearchTeams(),
+                    );
                   },
                   icon: Icon(
                     Icons.search_rounded,

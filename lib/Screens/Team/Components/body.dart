@@ -167,7 +167,7 @@ class _BodyState extends State<Body> {
           ),
           SizedBox(height: 15),
 
-          // if (rosterTabSelected == true) RosterTab(),
+          if (rosterTabSelected == true) RosterTab(),
           if (titlesTabSelected == true) TitlesWonTab(),
           if (historyTabSelected == true) HistoryTab(),
           //

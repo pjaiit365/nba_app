@@ -23,21 +23,6 @@ class TeamInfoSummary extends StatelessWidget {
       print(e.toString());
       Text('No internet connection available.');
     }
-
-    //   try {
-    //     for (var eachTeam in jsonData['data']) {
-    //       final specificTeam = SpecificTeamData(
-    //           abbreviation: eachTeam['abbreviation'],
-    //           location: eachTeam['city'],
-    //           conference: eachTeam['conference'],
-    //           division: eachTeam['division'],
-    //           fullName: eachTeam['full_name']);
-    //       teams.add(specificTeam);
-    //       print(teams);
-    //     }
-    //   } on HttpException catch (e) {
-    //     print(e.toString());
-    //   }
   }
 
   @override

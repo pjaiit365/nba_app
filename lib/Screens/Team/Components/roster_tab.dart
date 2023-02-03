@@ -9,15 +9,13 @@ class RosterTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
+        // physics: NeverScrollableScrollPhysics(),
+        primary: false,
         shrinkWrap: true,
-        itemCount: 30,
+        itemCount: 25,
         itemBuilder: (context, index) {
-          return PlayerTile();
-          // return PlayerTile(index: index);
-        },
-      ),
-    );
+          return PlayerTile(index: index);
+        });
   }
 }
