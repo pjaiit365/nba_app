@@ -1,190 +1,163 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:nba_app/Components/carousel_details.dart';
+import 'package:nba_app/Components/team_carousel.dart';
+import 'package:nba_app/Screens/Home/Components/body.dart';
 import '../constants.dart';
-import '../models/specific_team_data.dart';
 
-var jsonData;
-
-class TeamInfoSummary extends StatelessWidget {
-  TeamInfoSummary({super.key});
-
-  List<SpecificTeamData> teams = [];
-
-  Future getSpecificTeam() async {
-    try {
-      var response = await http.get(
-          Uri.https('balldontlie.io', '/api/v1/teams/${chosenTeamIndex + 1}'));
-      print(response.body);
-      jsonData = jsonDecode(response.body);
-      print(jsonData['id']);
-    } on NoSuchMethodError catch (e) {
-      print(e.toString());
-      Text('No internet connection available.');
-    }
-  }
+class TeamInfoSummary extends StatefulWidget {
+  final String image;
+  TeamInfoSummary({super.key, required this.image});
 
   @override
+  State<TeamInfoSummary> createState() => _TeamInfoSummaryState();
+}
+
+class _TeamInfoSummaryState extends State<TeamInfoSummary> {
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        height: 220,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(12),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          height: 220,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(12),
+            ),
+            border: Border.all(color: Colors.white, width: 1.5),
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage(widget.image),
+            ),
           ),
-          border: Border.all(color: Colors.white, width: 1.5),
-        ),
-        child: FutureBuilder(
-          future: getSpecificTeam(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 20),
-                  Center(
-                    child: Text(
-                      jsonData['full_name'],
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Helvetica'),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 35, left: 30),
+                      child: Center(
+                        child: Text(
+                          team[chosenTeamIndex].fullName,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Helvetica'),
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Abbreviation: ',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                                Text(
-                                  jsonData['abbreviation'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Location: ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                                Text(
-                                  jsonData['city'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Titles Won: ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                                Text(
-                                  '29',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Conference: ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                                Text(
-                                  jsonData['conference'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Division: ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                                Text(
-                                  jsonData['division'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0, top: 20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          shape: BoxShape.circle,
+                          backgroundBlendMode: BlendMode.lighten),
+                      child: Image.asset(
+                        teamLogo[chosenTeamIndex],
+                        height: 60,
+                        width: 60,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-                        child: Image.asset(
-                          teamLogo[chosenTeamIndex],
-                          height: 100,
-                          width: 100,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(color: Colors.blueAccent),
-              );
-            }
-          },
-        ),
-      ),
+              ),
+              Spacer(),
+              if (activeIndex == 0)
+                CarouselDetails(
+                  titleLeft: 'Abbreviation: ',
+                  subtitleLeft: team[chosenTeamIndex].abbreviation,
+                  titleRight: 'City: ',
+                  subtitleRight: team[chosenTeamIndex].city,
+                ),
+              if (activeIndex == 1)
+                CarouselDetails(
+                  titleLeft: 'Conference: ',
+                  subtitleLeft: team[chosenTeamIndex].conference,
+                  titleRight: 'Division: ',
+                  subtitleRight: team[chosenTeamIndex].division,
+                ),
+              if (activeIndex == 2)
+                CarouselDetails(
+                  titleLeft: 'Champ. Titles: ',
+                  subtitleLeft: '7',
+                  titleRight: 'Conf. Titles: ',
+                  subtitleRight: '12',
+                ),
+              TeamCarousel(),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
+
+// SizedBox(height: 10),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.start,
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Text(
+// 'Titles Won: ',
+// style: TextStyle(
+// color: Colors.white,
+// fontSize: 18,
+// fontStyle: FontStyle.italic),
+// ),
+// Text(
+// (team[chosenTeamIndex].titlesWon).toString(),
+// style:
+// TextStyle(color: Colors.white, fontSize: 18),
+// ),
+// ],
+// ),
+// SizedBox(height: 10),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.start,
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Text(
+// 'Conference: ',
+// style: TextStyle(
+// color: Colors.white,
+// fontSize: 18,
+// fontStyle: FontStyle.italic),
+// ),
+// Text(
+// team[chosenTeamIndex].conference,
+// style:
+// TextStyle(color: Colors.white, fontSize: 18),
+// ),
+// ],
+// ),
+// SizedBox(height: 10),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.start,
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Text(
+// 'Division: ',
+// style: TextStyle(
+// color: Colors.white,
+// fontSize: 18,
+// fontStyle: FontStyle.italic),
+// ),
+// Text(
+// team[chosenTeamIndex].division,
+// style:
+// TextStyle(color: Colors.white, fontSize: 18),
+// ),
+// ],
+// ),

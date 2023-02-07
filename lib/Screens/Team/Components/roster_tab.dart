@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Components/player_tile.dart';
+import '../../../constants.dart';
 
 class RosterTab extends StatelessWidget {
   const RosterTab({
@@ -13,7 +14,7 @@ class RosterTab extends StatelessWidget {
         // physics: NeverScrollableScrollPhysics(),
         primary: false,
         shrinkWrap: true,
-        itemCount: 25,
+        itemCount: 15,
         itemBuilder: (context, index) {
           return PlayerTile(index: index);
         });

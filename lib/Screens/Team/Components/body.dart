@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nba_app/Screens/Team/Components/history_tab.dart';
 import 'package:nba_app/Screens/Team/Components/roster_tab.dart';
 import 'package:nba_app/Screens/Team/Components/titles_tab.dart';
+import 'package:nba_app/constants.dart';
 
 import '../../../Components/team_info_summary.dart';
 
@@ -33,7 +35,23 @@ class _BodyState extends State<Body> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          TeamInfoSummary(),
+          CarouselSlider.builder(
+            itemCount: teamCarousel.length,
+            itemBuilder: (context, index, realIndex) {
+              return TeamInfoSummary(image: teamCarousel[index]);
+            },
+            options: CarouselOptions(
+              height: 220,
+              viewportFraction: 1,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 4),
+              onPageChanged: (index, reason) {
+                setState(() {
+                  activeIndex = index;
+                });
+              },
+            ),
+          ),
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,7 +185,7 @@ class _BodyState extends State<Body> {
           ),
           SizedBox(height: 15),
 
-          if (rosterTabSelected == true) RosterTab(),
+          // if (rosterTabSelected == true) RosterTab(),
           if (titlesTabSelected == true) TitlesWonTab(),
           if (historyTabSelected == true) HistoryTab(),
           //

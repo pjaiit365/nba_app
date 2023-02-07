@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'models/players.dart';
+
 Color kblue = Color(0xff0761AA);
 Color kred = Color(0xffD73247);
 
@@ -155,3 +157,17 @@ final Color greyDefault = Color(0xFFe0e0e0);
 
 bool isAllTimeGreatsClicked = false;
 bool isRetiredNumberClicked = false;
+
+List<PlayerData> player = [];
+
+bool isSelected = true;
+bool isSelected2 = false;
+bool isSelected3 = false;
+
+int activeIndex = 0;
+
+List<String> teamCarousel = [
+  'assets/team_pics/hawks.jpg',
+  'assets/team_pics/hawks.jpg',
+  'assets/team_pics/hawks.jpg',
+];

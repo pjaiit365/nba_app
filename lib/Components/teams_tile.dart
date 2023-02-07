@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:nba_app/Screens/Team/team.dart';
 import 'package:nba_app/constants.dart';
 
-class TeamsTile extends StatelessWidget {
+class TeamsTile extends StatefulWidget {
   final int index;
   final String team_abbreviation;
   final String team_name;
@@ -16,6 +18,11 @@ class TeamsTile extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<TeamsTile> createState() => _TeamsTileState();
+}
+
+class _TeamsTileState extends State<TeamsTile> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -25,7 +32,7 @@ class TeamsTile extends StatelessWidget {
             builder: (context) => Team(),
           ),
         );
-        chosenTeamIndex = index;
+        chosenTeamIndex = widget.index;
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 15.0, top: 5),
@@ -42,12 +49,12 @@ class TeamsTile extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListTile(
-                    title: Text(team_abbreviation),
-                    subtitle: Text(team_name),
+                    title: Text(widget.team_abbreviation),
+                    subtitle: Text(widget.team_name),
                   ),
                 ),
                 Image.asset(
-                  team_logo,
+                  widget.team_logo,
                   height: 60,
                   width: 100,
                 )

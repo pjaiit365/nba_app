@@ -7,21 +7,25 @@ import 'package:nba_app/models/teams.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 import '../../../Components/teams_tile.dart';
+import '../../../models/players.dart';
 
 List<TeamData> team = [];
 // List<Data> searchResults = [];
 
 Future getTeams() async {
   var response = await http.get(Uri.https('balldontlie.io', 'api/v1/teams'));
+  print(response.body);
   try {
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-      // print(response.body);
-
       for (var eachTeam in jsonData['data']) {
         final teams = TeamData(
             abbreviation: eachTeam['abbreviation'],
-            fullName: eachTeam['full_name']);
+            fullName: eachTeam['full_name'],
+            conference: eachTeam['conference'],
+            division: eachTeam['division'],
+            titlesWon: 29,
+            city: eachTeam['city']);
         team.add(teams);
       }
     } else {
@@ -32,7 +36,6 @@ Future getTeams() async {
   } on RangeError catch (e) {
     print('Error: $e');
   }
-  print(team.length);
   // if (query != null) {
   //   searchResults = searchResults
   //       .where((element) =>
@@ -83,14 +86,14 @@ class Body extends StatelessWidget {
                 return Padding(
                     padding: const EdgeInsets.only(bottom: 15.0, top: 5),
                     child: Shimmer(
-                      color: Colors.white,
-                      duration: Duration(seconds: 1),
+                      color: Colors.grey.shade500,
+                      duration: Duration(seconds: 3),
                       direction: ShimmerDirection.fromLTRB(),
-                      interval: Duration(milliseconds: 500),
+                      interval: Duration(seconds: 1),
                       child: Container(
                         height: 95,
                         decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(12),
                             border:
                                 Border.all(color: Colors.white, width: 1.5)),
@@ -106,30 +109,30 @@ class Body extends StatelessWidget {
                                     padding: const EdgeInsets.only(
                                         bottom: 8.0, top: 10),
                                     child: Container(
-                                      height: 20,
+                                      height: 12,
                                       width: 50,
                                       decoration: BoxDecoration(
-                                          color: Colors.grey[400],
+                                          color: Colors.grey[300],
                                           borderRadius:
-                                              BorderRadius.circular(4)),
+                                              BorderRadius.circular(3)),
                                     ),
                                   ),
                                   subtitle: Container(
-                                    height: 20,
+                                    height: 12,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        color: Colors.grey[400],
-                                        borderRadius: BorderRadius.circular(4)),
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(3)),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(right: 14.0),
+                                padding: const EdgeInsets.only(right: 20.0),
                                 child: Container(
                                   height: 60,
                                   width: 60,
                                   decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Colors.grey[300],
                                       shape: BoxShape.circle),
                                 ),
                               )
