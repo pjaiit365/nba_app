@@ -44,7 +44,7 @@ class _BodyState extends State<Body> {
               height: 220,
               viewportFraction: 1,
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 4),
+              autoPlayInterval: Duration(seconds: 20),
               onPageChanged: (index, reason) {
                 setState(() {
                   activeIndex = index;

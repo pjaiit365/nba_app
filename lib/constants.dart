@@ -171,3 +171,8 @@ List<String> teamCarousel = [
   'assets/team_pics/hawks.jpg',
   'assets/team_pics/hawks.jpg',
 ];
+
+List<String> playerTeamYears = ['2018- ', '2014-18', '2010-14', '2003-10'];
+List<String> playerTeamsPlayed = ['Lakers', 'Cavaliers', 'Heat', 'Cavaliers'];
+List<String> playerTeamNumbers = ['6,23', '23', '6', '23'];
+List<String> playerTeamPosition = ['SF', 'SF', 'SF,PF', 'SG,SF'];

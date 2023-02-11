@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
+import 'package:nba_app/Screens/Player/player_details_screen.dart';
 import 'package:nba_app/models/players.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -63,62 +64,71 @@ class PlayerTile extends StatelessWidget {
     return FutureBuilder(
         future: getPlayers(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done &&
-              player.isNotEmpty) {
+          if (snapshot.connectionState == ConnectionState.done) {
             return Padding(
               padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 15),
-              child: Container(
-                height: 85,
-                decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.white, width: 1.5)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/nba_logo.png',
-                        height: 60,
-                        width: 70,
-                      ),
-                      VerticalDivider(
-                        thickness: 3,
-                        color: Colors.white,
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            player[index].firstName +
-                                ' ' +
-                                player[index].lastName,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PLayerDetails(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 85,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.white, width: 1.5)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/nba_logo.png',
+                          height: 60,
+                          width: 70,
+                        ),
+                        VerticalDivider(
+                          thickness: 3,
+                          color: Colors.white,
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: Text(
+                              player[index].firstName +
+                                  ' ' +
+                                  player[index].lastName,
+                            ),
+                            subtitle: player[index].position.isEmpty
+                                ? Text(
+                                    'N/A',
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Helvetica'),
+                                  )
+                                : Text(
+                                    player[index].position,
+                                    style: TextStyle(
+                                        fontSize: 13, fontFamily: 'Helvetica'),
+                                  ),
                           ),
-                          subtitle: player[index].position.isEmpty
-                              ? Text(
-                                  'N/A',
-                                  style: TextStyle(
-                                      fontSize: 13, fontFamily: 'Helvetica'),
-                                )
-                              : Text(
-                                  player[index].position,
-                                  style: TextStyle(
-                                      fontSize: 13, fontFamily: 'Helvetica'),
-                                ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
-                        child: Text(
-                          '#' + ' 23',
-                          style: TextStyle(
-                              fontSize: 27,
-                              color: kblue,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15.0),
+                          child: Text(
+                            '#' + ' 23',
+                            style: TextStyle(
+                                fontSize: 27,
+                                color: kblue,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
