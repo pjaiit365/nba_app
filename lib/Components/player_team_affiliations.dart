@@ -6,8 +6,10 @@ import '../constants.dart';
 import 'measurement_tile.dart';
 
 class PlayerTeamAffiliations extends StatelessWidget {
+  final String collegeAffiliation;
   const PlayerTeamAffiliations({
     Key? key,
+    required this.collegeAffiliation,
   }) : super(key: key);
 
   @override
@@ -68,8 +70,7 @@ class PlayerTeamAffiliations extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.blueAccent),
                 ),
                 MeasurementRow(
-                    title: 'Affiliation: ',
-                    measurement: 'St. Vincent-St. Mary HS (OH)/USA'),
+                    title: 'Affiliation: ', measurement: collegeAffiliation),
                 MeasurementRow(title: 'Location: ', measurement: 'Akron, Ohio'),
                 MeasurementRow(
                     title: 'Titles Won: ',

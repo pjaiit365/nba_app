@@ -13,6 +13,7 @@ class TitlesWonTab extends StatefulWidget {
 }
 
 class _TitlesWonTabState extends State<TitlesWonTab> {
+  bool isHovering = false;
   bool finalsShowMore = false;
   bool conferenceShowMore = false;
 
@@ -67,17 +68,19 @@ class _TitlesWonTabState extends State<TitlesWonTab> {
                       ],
                     ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       setState(() {
                         finalsShowMore = !finalsShowMore;
                       });
                     },
+                    onHover: (value) {},
                     child: Container(
                       height: 50,
                       width: 50,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color:
+                            isHovering ? Colors.blueAccent : Colors.grey[300],
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.white, width: 1.5),
                       ),
@@ -89,7 +92,7 @@ class _TitlesWonTabState extends State<TitlesWonTab> {
                             )
                           : Icon(
                               Icons.arrow_forward_ios,
-                              color: Colors.black,
+                              color: isHovering ? Colors.white : Colors.black,
                             ),
                     ),
                   )

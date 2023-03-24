@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:nba_app/Components/player_details.dart';
 
 class MeasurementTile extends StatelessWidget {
+  final String heightFeet;
+  final String heightInches;
+  final String heightMeters;
+  final String weightPounds;
+  final String weightKilograms;
   const MeasurementTile({
     Key? key,
+    required this.heightFeet,
+    required this.heightInches,
+    required this.heightMeters,
+    required this.weightPounds,
+    required this.weightKilograms,
   }) : super(key: key);
 
   @override
@@ -36,16 +46,19 @@ class MeasurementTile extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.blueAccent),
                 ),
                 MeasurementRow(
-                    title: 'In feet and inches: ', measurement: "6' " + '9"'),
+                    title: 'In feet and inches: ',
+                    measurement: heightFeet + "' " + heightInches + '"'),
                 MeasurementRow(title: 'In meters: ', measurement: '2.06 m'),
                 SizedBox(height: 18),
                 Text(
                   'Weight',
                   style: TextStyle(fontSize: 18, color: Colors.blueAccent),
                 ),
-                MeasurementRow(title: 'In pounds: ', measurement: '250 lb'),
                 MeasurementRow(
-                    title: 'In kilograms: ', measurement: '113.4 kg'),
+                    title: 'In pounds: ', measurement: '$weightPounds lb'),
+                MeasurementRow(
+                    title: 'In kilograms: ',
+                    measurement: '$weightKilograms kg'),
                 SizedBox(height: 15),
               ],
             ),

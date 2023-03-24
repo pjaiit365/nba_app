@@ -3,7 +3,17 @@ import 'package:nba_app/Components/player_details_heading_underline.dart';
 import 'package:nba_app/Components/player_details_tile.dart';
 
 class PLayerDetails extends StatelessWidget {
-  const PLayerDetails({Key? key}) : super(key: key);
+  final String playerName;
+  final String position;
+  final String team;
+  final String active;
+  const PLayerDetails(
+      {Key? key,
+      required this.playerName,
+      required this.position,
+      required this.team,
+      required this.active})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +45,12 @@ class PLayerDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    PlayerDetailsTile(title: 'Name', subtitle: 'LeBron James'),
-                    PlayerDetailsTile(
-                        title: 'Postion', subtitle: 'Power Forward'),
-                    PlayerDetailsTile(
-                        title: 'Team', subtitle: 'Los Angeles Lakers'),
+                    PlayerDetailsTile(title: 'Name', subtitle: playerName),
+                    PlayerDetailsTile(title: 'Postion', subtitle: position),
+                    PlayerDetailsTile(title: 'Team', subtitle: team),
                     PlayerDetailsTile(
                         title: 'Annual Salary', subtitle: '\$17.4 M'),
-                    PlayerDetailsTile(title: 'Active', subtitle: 'Yes'),
+                    PlayerDetailsTile(title: 'Active', subtitle: active),
                   ],
                 ),
                 Spacer(),

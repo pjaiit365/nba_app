@@ -121,6 +121,6 @@ class _HistoryTileState extends State<HistoryTile> {
               ),
             ),
           )
-        : Text('No history prov');
+        : Text('No history provided.');
   }
 }
